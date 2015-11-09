@@ -9,15 +9,44 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    
+    var time = 0
+    var timer = NSTimer()
+    
 
+    @IBOutlet var resultDisplay: UILabel!
+    
+    
+    @IBAction func startTimer(sender: AnyObject) {
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("displayResult"), userInfo: nil, repeats: true)
+    }
+    
+    @IBAction func stopTimer(sender: AnyObject) {
+                timer.invalidate()
+    }
+    
+    @IBAction func resetTimer(sender: AnyObject) {
+        time = 0
+        resultDisplay.text = String(time)
+        timer.invalidate()
+        
+    }
+    
+    
+    func displayResult() {
+        time++
+        resultDisplay.text = String(time) //We can also use "\(time)"
+    }
+
+    //What ever is inside this method wil get executed on load.
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
